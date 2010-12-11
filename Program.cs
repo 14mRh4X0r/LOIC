@@ -11,6 +11,7 @@ namespace LOIC
 		{
 			bool hive = false;
 			bool hide = false;
+			bool cli = false;
 			/* IRC */
 			string ircserver = "";
 			string ircport = "";
@@ -31,11 +32,16 @@ namespace LOIC
 				}
 				/* Lets try this! */
 				if (s.ToLower() == "/hidden") {hide = true;}
+				if (s.ToLower() == "/cli") cli = true;
 				count++;
 			}
-			//Application.EnableVisualStyles();
-			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new frmMain(hive, hide, ircserver, ircport, ircchannel));
+			if (cli) {
+				new CLI(hive, ircserver, ircport, ircchannel);
+			} else {
+				//Application.EnableVisualStyles();
+				Application.SetCompatibleTextRenderingDefault(false);
+				Application.Run(new frmMain(hive, hide, ircserver, ircport, ircchannel));
+			}
 		}
 	}
     public partial class Functions
